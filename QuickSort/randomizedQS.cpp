@@ -2,8 +2,8 @@
 using namespace std;
 int part(int a[], int str, int end) {
     int pivot, pindex;
-    //pindex = rand() % (end-str+1) + str;
-    //swap(a[end], a[pindex]);
+    pindex = rand() % (end-str+1) + str;
+    swap(a[end], a[pindex]);
     pindex = str;
     pivot = a[end];
     for(int i = str; i < end; i++) {
