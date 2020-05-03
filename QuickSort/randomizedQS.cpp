@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 using namespace std;
-int part(int a[], int str, int end) {
+int partition(int a[], int start, int end) {
     int pivot, pindex;
-    pindex = rand() % (end-str+1) + str;
+    pindex = rand() % (end-start+1) + start;
+    pivot = a[pindex];
     swap(a[end], a[pindex]);
-    pindex = str;
-    pivot = a[end];
-    for(int i = str; i < end; i++) {
+    pindex = start;
+    for(int i = start; i < end; i++) {
         if(a[i] < pivot) {
             swap(a[i], a[pindex]);
             pindex++;
@@ -15,17 +15,17 @@ int part(int a[], int str, int end) {
     swap(a[pindex], a[end]);
     cout << "\npivot = " << pivot;
     cout << " Elements are :\n";
-    for(int i = str; i <= end; i++) {
+    for(int i = start; i <= end; i++) {
         cout << a[i] << " ";
     }
     cout << "\n";
     return pindex;
 }
-void qsort(int a[], int str, int en) {
-    if(str < en) {
-        int o = part(a, str, en);
-        qsort(a, str, o-1);
-        qsort(a, o+1, en);
+void qsort(int a[], int start, int end) {
+    if(start < end) {
+        int p_index = partition(a, start, end);
+        qsort(a, start, p_index-1);
+        qsort(a, p_index+1, end);
     }
 }
 int main() { 
@@ -40,7 +40,7 @@ int main() {
         }
         qsort(a, 0, n-1);
         for(int i : a) {
-            cout << *i << " "; 
+            cout << i << " "; 
         }
     }
     cout << "\n";
